@@ -11,6 +11,7 @@ const routes_1 = __importDefault(require("./routes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = Number(process.env.PORT || 8000);
+const host = '0.0.0.0';
 const codespaceName = process.env.CODESPACE_NAME;
 const baseUrl = codespaceName
     ? `https://${codespaceName}-8000.app.github.dev`
@@ -24,7 +25,7 @@ app.use('/api', routes_1.default);
 async function startServer() {
     try {
         await (0, database_1.connectDatabase)();
-        app.listen(port, () => {
+        app.listen(port, host, () => {
             console.log(`Server listening on port ${port}`);
             console.log(`API base URL: ${baseUrl}`);
         });
